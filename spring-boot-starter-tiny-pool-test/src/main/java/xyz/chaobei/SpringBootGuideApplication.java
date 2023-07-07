@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import xyz.chaobei.tinypool.TinyPoolExecutor;
 import xyz.chaobei.tinypool.annotations.EnableTinyPool;
+import xyz.chaobei.tinypool.task.TinyTask;
 
 @SpringBootApplication
 @EnableTinyPool
@@ -25,6 +26,6 @@ public class SpringBootGuideApplication implements CommandLineRunner {
             System.out.println("success");
         };
 
-        tinyPoolExecutor.execute(runnable);
+        tinyPoolExecutor.execute(new TinyTask("count", runnable));
     }
 }

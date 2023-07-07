@@ -1,36 +1,73 @@
 package xyz.chaobei.tinypool;
 
 import xyz.chaobei.tinypool.config.TinyPoolProperties;
+import xyz.chaobei.tinypool.task.Task;
 
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 public class TinyPoolExecutor {
 
-    private final ThreadPoolExecutor threadPoolExecutor;
+    private final ConcurrentHashMap<String, TinyPoolThreadExecutor> pools = new ConcurrentHashMap<>();
+    private final String DEFAULT_KEY = "default";
+    private final TinyPoolThreadExecutor def;
 
     public TinyPoolExecutor(TinyPoolProperties properties) {
         this(properties.getCorePoolSize(), properties.getMaximumPoolSize());
     }
 
-    public TinyPoolExecutor(int corePoolSize, int maximumPoolSize) {
-        this.threadPoolExecutor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100));
+    private TinyPoolExecutor(int corePoolSize, int maximumPoolSize) {
+        this.def = new TinyPoolThreadExecutor(corePoolSize, maximumPoolSize, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100));
+        this.pools.put(DEFAULT_KEY, this.def);
     }
 
-    public void execute(Runnable runnable) {
-        threadPoolExecutor.execute(runnable);
+    public void execute(Task runnable) {
+        this.execute(DEFAULT_KEY, runnable);
     }
 
-    private void setCorePoolSize(int corePoolSize) {
-
+    public void execute(String key, Task runnable) {
+        pools.getOrDefault(key, def).execute(runnable);
     }
 
-    protected void beforeExecute(Thread t, Runnable r) {
-
+    /**
+     * get the number of active thread
+     *
+     * @return
+     */
+    protected int getActiveCount(String key) {
+        return pools.get(key).getActiveCount();
     }
 
-    protected void afterExecute(Runnable r, Throwable t) {
-
+    protected long getTaskCount(String key) {
+        return pools.get(key).getTaskCount();
     }
+
+    /**
+     * the number of core thread
+     *
+     * @return
+     */
+    protected int getCorePoolSize(String key) {
+        return pools.get(key).getCorePoolSize();
+    }
+
+    /**
+     * the number of the largest pool size
+     *
+     * @return
+     */
+    protected int getMaximumPoolSize(String key) {
+        return pools.get(key).getMaximumPoolSize();
+    }
+
+    protected long getCompletedTaskCount(String key) {
+        return pools.get(key).getCompletedTaskCount();
+    }
+
+    protected long getLargestPoolSize(String key) {
+        return pools.get(key).getLargestPoolSize();
+    }
+
+
 }
