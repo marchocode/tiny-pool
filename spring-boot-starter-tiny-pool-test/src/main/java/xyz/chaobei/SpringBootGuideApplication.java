@@ -5,8 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import xyz.chaobei.tinypool.TinyPoolExecutor;
+import xyz.chaobei.tinypool.annotations.EnableTinyPool;
 
 @SpringBootApplication
+@EnableTinyPool
 public class SpringBootGuideApplication implements CommandLineRunner {
 
     public static void main(String[] args) {

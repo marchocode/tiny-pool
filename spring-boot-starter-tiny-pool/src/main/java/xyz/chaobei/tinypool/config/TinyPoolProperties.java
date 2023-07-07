@@ -5,6 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("tiny.pool")
 public class TinyPoolProperties {
 
+    private String name = "default";
+
     private int corePoolSize;
 
     private int maximumPoolSize;
