@@ -1,3 +1,6 @@
 .idea/
+spring-boot-starter-tiny-pool-vue/dist/
+spring-boot-starter-tiny-pool-vue/node_modules/
+
 */target/
 *.iml

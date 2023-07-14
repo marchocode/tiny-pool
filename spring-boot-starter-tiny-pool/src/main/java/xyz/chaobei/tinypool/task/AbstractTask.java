@@ -5,11 +5,10 @@ package xyz.chaobei.tinypool.task;
  */
 public abstract class AbstractTask implements Task {
 
-    private long startTime;
-    private long endTime;
-    private boolean success;
-    private Throwable error;
-
+    protected long startTime;
+    protected long endTime;
+    protected boolean success;
+    protected Throwable error;
     private final String key;
     private final Runnable runnable;
 

@@ -13,14 +13,4 @@ public class TinyAdminController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/core")
-    public String core() {
-        return "core";
-    }
-
 }

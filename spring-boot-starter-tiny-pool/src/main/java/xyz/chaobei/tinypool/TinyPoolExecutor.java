@@ -30,6 +30,14 @@ public class TinyPoolExecutor {
         pools.getOrDefault(key, def).execute(runnable);
     }
 
+    public ConcurrentHashMap<String, TinyPoolThreadExecutor> getPools() {
+        return this.pools;
+    }
+
+    public TinyPoolThreadExecutor getPool(String key) {
+        return this.pools.get(key);
+    }
+
     /**
      * get the number of active thread
      *
