@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkspring_boot_starter_tiny_pool_vue"]=self["webpackChunkspring_boot_starter_tiny_pool_vue"]||[]).push([[443],{5399:function(t,n,s){s.r(n),s.d(n,{default:function(){return o}});var u=function(){var t=this;t._self._c;return t._m(0)},r=[function(){var t=this,n=t._self._c;return n("div",{staticClass:"about"},[n("h1",[t._v("This is an about page")])])}],e=s(1001),_={},i=(0,e.Z)(_,u,r,!1,null,null,null),o=i.exports}}]);
+//# sourceMappingURL=about.9db661e4.js.map
